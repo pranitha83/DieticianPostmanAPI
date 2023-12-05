@@ -1,0 +1,3495 @@
+{
+	"info": {
+		"_postman_id": "926d8e73-882d-475b-93ea-6fb1751cdc53",
+		"name": "Dietician API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Dietician Login",
+			"item": [
+				{
+					"name": "Login with Invalid BaseURL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6dbde5cc-ef6e-4761-8fd7-4d4a5a0ea422",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "1f1f4fa2-eabe-44b7-8231-a1417af0b98a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Newtoken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Faith79\",\r\n  \"userLoginEmail\": \"Raghavysenthilkumar@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dietician-dev-41d9a344a720.herokuapp.com/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid login credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b4620b67-f74f-4a0f-b3c5-918770fe78ea",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2e458c21-5d6f-4a0e-8da5-6e09bcbb65e0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{GlobalToken-Rag}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Faith7\",\r\n  \"userLoginEmail\": \"Raghavysenthilkumar@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Login without body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a50b395-2246-4daf-a24c-59a2c03eeca4",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "db5d5588-20ff-4852-904e-4db46edc9a6e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Login with Invalid Endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0625d49a-467c-4869-b0bd-6d628fc3c3e0",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "0a70bede-a67f-4001-af03-5a08581af789",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{GlobalToken-Rag}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Faith79\",\r\n  \"userLoginEmail\": \"Raghavysenthilkumar@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login1"
+					},
+					"response": []
+				},
+				{
+					"name": "dietician/Pranita/Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "42d4522b-39c5-4934-8467-8ca7d116b69b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const token = response.token;\r",
+									"console.log(token);\r",
+									"\r",
+									"pm.globals.set(\"P-Token\",token);\r",
+									"\r",
+									"const schema = {\r",
+									"\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"token\": { \"type\": \"string\" },\r",
+									"    \"type\": { \"type\": \"string\" },\r",
+									"    \"userId\": { \"type\": \"integer\" },\r",
+									"    \"loginUserEmail\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"roles\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\"token\", \"type\", \"userId\", \"loginUserEmail\", \"roles\"]\r",
+									"}\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ce3b4129-c1e7-4e68-a55b-42b7d7b52db4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "c1ccaa19-b191-40b8-8baf-752e69cfa775",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"{{Bloom20}}\",\r\n  \"userLoginEmail\": \"{{pranithareddy83@gmail.com}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician Sudha Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f6049df2-a5f9-4eb4-978a-6ddeb78ee19e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const token = response.token;\r",
+									"console.log(token);\r",
+									"\r",
+									"pm.globals.set(\"Su-Token\",token);\r",
+									"\r",
+									"const schema = {\r",
+									"\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"token\": { \"type\": \"string\" },\r",
+									"    \"type\": { \"type\": \"string\" },\r",
+									"    \"userId\": { \"type\": \"integer\" },\r",
+									"    \"loginUserEmail\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"roles\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\"token\", \"type\", \"userId\", \"loginUserEmail\", \"roles\"]\r",
+									"}\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b2268b9e-e022-4b24-bb35-4d4303b4b67e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Brave39\",\r\n  \"userLoginEmail\": \"mailsudhamaha@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietitian/Pritee/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b53858f-c3fc-4cdd-941b-77c1815536e5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const token = response.token;\r",
+									"console.log(token);\r",
+									"\r",
+									"pm.globals.set(\"PT-Token\",token);\r",
+									"\r",
+									"const schema = {\r",
+									"\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"token\": { \"type\": \"string\" },\r",
+									"    \"type\": { \"type\": \"string\" },\r",
+									"    \"userId\": { \"type\": \"integer\" },\r",
+									"    \"loginUserEmail\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"roles\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\"token\", \"type\", \"userId\", \"loginUserEmail\", \"roles\"]\r",
+									"}\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "990b401f-3e0b-4640-b728-9926e1cf9146",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Build33\",\r\n  \"userLoginEmail\": \"priteetangle@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/Reshma/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "24511787-5d5d-43cd-b6eb-f37169f66c0c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const token = response.token;\r",
+									"console.log(token);\r",
+									"\r",
+									"pm.globals.set(\"RESA-Token\",token);\r",
+									"\r",
+									"const schema = {\r",
+									"\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"token\": { \"type\": \"string\" },\r",
+									"    \"type\": { \"type\": \"string\" },\r",
+									"    \"userId\": { \"type\": \"integer\" },\r",
+									"    \"loginUserEmail\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"roles\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\"token\", \"type\", \"userId\", \"loginUserEmail\", \"roles\"]\r",
+									"}\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b526a6eb-3924-41e6-ac75-5c27697b6300",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RESA-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Thank94\",\r\n  \"userLoginEmail\": \"reshmaasawant1805@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/Raghvy/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "008bc8b9-0abf-4457-b49b-0a4357a6e51c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const token = response.token;\r",
+									"console.log(token);\r",
+									"\r",
+									"pm.globals.set(\"RASK-Token\",token);\r",
+									"\r",
+									"const schema = {\r",
+									"\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"token\": { \"type\": \"string\" },\r",
+									"    \"type\": { \"type\": \"string\" },\r",
+									"    \"userId\": { \"type\": \"integer\" },\r",
+									"    \"loginUserEmail\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"roles\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\"token\", \"type\", \"userId\", \"loginUserEmail\", \"roles\"]\r",
+									"}\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "81ad5887-97af-4baf-805a-09cfca335bbf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RASK-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Faith79\",\r\n  \"userLoginEmail\": \"Raghavysenthilkumar@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/Vivien/Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d8ef140d-f9e0-4e4e-b121-97d90ddd4fb3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const token = response.token;\r",
+									"console.log(token);\r",
+									"\r",
+									"pm.globals.set(\"V-Token\",token);\r",
+									"\r",
+									"const schema = {\r",
+									"\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"token\": { \"type\": \"string\" },\r",
+									"    \"type\": { \"type\": \"string\" },\r",
+									"    \"userId\": { \"type\": \"integer\" },\r",
+									"    \"loginUserEmail\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"roles\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\"token\", \"type\", \"userId\", \"loginUserEmail\", \"roles\"]\r",
+									"}\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "5ae70139-833f-46a5-923d-4fb3e46cfefe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Glory99\",\r\n  \"userLoginEmail\": \"vivienobitulata.ugwu@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				}
+			],
+			"id": "4e1a5c1c-3b33-4e44-b6ab-8032558e23ec"
+		},
+		{
+			"name": "Patient Controller",
+			"item": [
+				{
+					"name": "NegCreateNewPatient(MissingMandatoryField)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45494657-c16b-4e8f-80c2-e38ab94c7311",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e9bc9dd4-5bc1-4304-bd92-7fe333950bf3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "1bd8a59f-2bc1-46d3-9308-9aee114d1918",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"\",\n  \"LastName\": \"\",\n  \"ContactNumber\": \"{{ContactNumber}}\",\n  \"Email\": \"{{Email}}\",\n  \"Allergy\": \"{{Allergy}}\",\n  \"FoodCategory\": \"{{FoodCategory}}\",\n  \"DateOfBirth\": \"{{DateOfBirth}}\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/HyperThyroid_Report_final.pdf"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "NegCreateNewPatient(DuplicateEntity)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45494657-c16b-4e8f-80c2-e38ab94c7311",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e9bc9dd4-5bc1-4304-bd92-7fe333950bf3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "a1eac7ef-2636-4466-856d-d20df72ebe90",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n  \"ContactNumber\": \"{{ContactNumber}}\",\n  \"Email\": \"{{Email}}\",\n  \"Allergy\": \"{{Allergy}}\",\n  \"FoodCategory\": \"{{FoodCategory}}\",\n  \"DateOfBirth\": \"{{DateOfBirth}}\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/HyperThyroid_Report_final.pdf"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "NegCreateNewPatient(MissingKeyField)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45494657-c16b-4e8f-80c2-e38ab94c7311",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e9bc9dd4-5bc1-4304-bd92-7fe333950bf3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b57bfaa7-73b9-492d-ac22-b3c98b544de5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n  \"ContactNumber\": \"{{ContactNumber}}\",\n  \"Email\": \"{{Email}}\",\n  \"Allergy\": \"{{Allergy}}\",\n  \"FoodCategory\": \"{{FoodCategory}}\",\n  \"DateOfBirth\": \"{{DateOfBirth}}\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/HyperThyroid_Report_final.pdf"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "NegCreateNewPatient(InvalidEndPoint)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45494657-c16b-4e8f-80c2-e38ab94c7311",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e9bc9dd4-5bc1-4304-bd92-7fe333950bf3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2bdfaa13-5278-4c05-ab1b-258da9ec0718",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n  \"ContactNumber\": \"{{ContactNumber}}\",\n  \"Email\": \"{{Email}}\",\n  \"Allergy\": \"{{Allergy}}\",\n  \"FoodCategory\": \"{{FoodCategory}}\",\n  \"DateOfBirth\": \"{{DateOfBirth}}\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/HyperThyroid_Report_final.pdf"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+									"src": "/C:/Users/ptang/Downloads/Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patien"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNewPatient/Pritee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45494657-c16b-4e8f-80c2-e38ab94c7311",
+								"exec": [
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const patientId = response.patientId;\r",
+									"console.log(response.patientId);\r",
+									"pm.globals.set(\"pID\",patientId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e9bc9dd4-5bc1-4304-bd92-7fe333950bf3",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}\r",
+									"\r",
+									"function generateRandomEmail() {\r",
+									"    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let randomEmail = '';\r",
+									"\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * chars.length);\r",
+									"        randomEmail += chars.charAt(randomIndex);\r",
+									"    }\r",
+									"\r",
+									"    return `${randomEmail}@example.com`; \r",
+									"}\r",
+									"\r",
+									"pm.variables.set('randomEmail', generateRandomEmail());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f7d8dc96-38ab-4e8b-9524-c7d105d2d02a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n  \"ContactNumber\": \"{{ContactNumber}}\",\n  \"Email\": \"{{randomEmail}}\",\n  \"Allergy\": \"{{Allergy}}\",\n  \"FoodCategory\": \"{{FoodCategory}}\",\n  \"DateOfBirth\": \"{{DateOfBirth}}\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/SuManaSvi/Downloads/HyperThyroid_Report_final.pdf"
+								},
+								{
+									"key": "",
+									"type": "file",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNewPatient/Sudha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73f24de2-9846-4840-b167-6e4b77fb32c5",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const schema ={\r",
+									" \r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"patientId\": { \"type\": \"integer\" },\r",
+									"    \"FirstName\": { \"type\": \"string\" },\r",
+									"    \"LastName\": { \"type\": \"string\" },\r",
+									"    \"ContactNumber\": { \"type\": \"string\" },\r",
+									"    \"Email\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"Allergy\": { \"type\": \"string\" },\r",
+									"    \"FoodCategory\": { \"type\": \"string\" },\r",
+									"    \"FileMorbidity\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"          \"T4\": { \"type\": \"string\" },\r",
+									"          \"TSH\": { \"type\": \"string\" }\r",
+									"        },\r",
+									"        \"required\": [\"T4\", \"TSH\"]\r",
+									"      }\r",
+									"    },\r",
+									"    \"FileMorbidityCondition\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": { \"type\": \"string\" }\r",
+									"    },\r",
+									"    \"DateOfBirth\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+									"    \"DieticianId\": { \"type\": \"integer\" }\r",
+									"  },\r",
+									"  \"required\": [\"patientId\", \"FirstName\", \"LastName\", \"ContactNumber\", \"Email\", \"Allergy\", \"FoodCategory\", \"FileMorbidity\", \"FileMorbidityCondition\", \"DateOfBirth\", \"DieticianId\"]\r",
+									"}\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"console.log('FirstName:', pm.variables.get('FirstName'));\r",
+									"\r",
+									"const response =pm.response.json();\r",
+									"const patientId = response.patientId;\r",
+									"pm.globals.set(\"SudhaPatient\",patientId )\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "180f17a1-b200-4a75-9bf3-9a96a5b3209f",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}\r",
+									"\r",
+									"function generateRandomEmail() {\r",
+									"    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let randomEmail = '';\r",
+									"\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * chars.length);\r",
+									"        randomEmail += chars.charAt(randomIndex);\r",
+									"    }\r",
+									"\r",
+									"    return `${randomEmail}@example.com`; \r",
+									"}\r",
+									"\r",
+									"pm.variables.set('randomEmail', generateRandomEmail());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b642ef8a-730c-48e6-badf-299da1bb4445",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{randomEmail}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCategory}}\",\n    \"DateOfBirth\": \"{{DateOfBirth}}\"\n\t\n}",
+									"type": "text",
+									"contentType": "multipart/form-data"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/SuManaSvi/Downloads/Copy of Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNewpatient/Vivien",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b62de32d-cbbe-472a-9391-39336a24049d",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									" const patientId = response.patientId;\r",
+									"\r",
+									"console.log(response.patientId);\r",
+									"\r",
+									"pm.globals.set(\"patientId_Vee\",patientId);\r",
+									"\r",
+									"const schema ={\r",
+									" \r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"patientId\": { \"type\": \"integer\" },\r",
+									"    \"FirstName\": { \"type\": \"string\" },\r",
+									"    \"LastName\": { \"type\": \"string\" },\r",
+									"    \"ContactNumber\": { \"type\": \"string\" },\r",
+									"    \"Email\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"Allergy\": { \"type\": \"string\" },\r",
+									"    \"FoodCategory\": { \"type\": \"string\" },\r",
+									"    \"FileMorbidity\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"          \"T4\": { \"type\": \"string\" },\r",
+									"          \"TSH\": { \"type\": \"string\" },\r",
+									"          \"T3\": {\"type\": \"string\"},\r",
+									"        },\r",
+									"        \"required\": [\"T4\", \"TSH\", \"T3\"]\r",
+									"      }\r",
+									"    },\r",
+									"    \"FileMorbidityCondition\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": { \"type\": \"string\" }\r",
+									"    },\r",
+									"    \"DateOfBirth\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+									"    \"DieticianId\": { \"type\": \"integer\" }\r",
+									"  },\r",
+									"  \"required\": [\"patientId\", \"FirstName\", \"LastName\", \"ContactNumber\", \"Email\", \"Allergy\", \"FoodCategory\", \"FileMorbidity\", \"FileMorbidityCondition\", \"DateOfBirth\", \"DieticianId\"]\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "87eea880-0934-435e-b196-955215adadc6",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}\r",
+									"\r",
+									"function generateRandomEmail() {\r",
+									"    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let randomEmail = '';\r",
+									"\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * chars.length);\r",
+									"        randomEmail += chars.charAt(randomIndex);\r",
+									"    }\r",
+									"\r",
+									"    return `${randomEmail}@example.com`; \r",
+									"}\r",
+									"\r",
+									"pm.variables.set('randomEmail', generateRandomEmail());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "74fb9c2a-062a-4d45-9caa-2abd1eab8697",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{randomEmail}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCategory}}\",\n      \"DateOfBirth\": \"{{DateOfBirth}}\"\t\n}",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/SuManaSvi/Downloads/HyperThyroid_Report_final.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNewPatient/Reshma",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "77bd9700-8be8-4411-80c9-c010efe43bdf",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+									"    console.log(response.json());\r",
+									"});\r",
+									"const response = pm.response.json();\r",
+									" const PatientID = response.patientId;\r",
+									" pm.globals.set(\"Reshma-PatientID\",PatientID );"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "07a7d07a-dd9a-4fef-a553-8dfe8ed9042b",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}\r",
+									"\r",
+									"function generateRandomEmail() {\r",
+									"    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let randomEmail = '';\r",
+									"\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * chars.length);\r",
+									"        randomEmail += chars.charAt(randomIndex);\r",
+									"    }\r",
+									"\r",
+									"    return `${randomEmail}@example.com`; \r",
+									"}\r",
+									"\r",
+									"pm.variables.set('randomEmail', generateRandomEmail());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "5a3f4dbf-6b26-459b-b7bf-8ab90a2cee89",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RESA-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo ",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{randomEmail}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCategory}}\",\n    \"DateOfBirth\": \"{{DateOfBirth}}\"\n\t\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/SuManaSvi/Downloads/Copy of Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "CreatedNewPatient/Pranitha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd215a0c-f487-4a51-b6ff-25ca17c29aae",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									" const patientId = response.patientId;\r",
+									"\r",
+									"console.log(response.patientId);\r",
+									"\r",
+									"pm.globals.set(\"Pranita-patientId\",patientId);\r",
+									"\r",
+									"const schema ={\r",
+									" \r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"patientId\": { \"type\": \"integer\" },\r",
+									"    \"FirstName\": { \"type\": \"string\" },\r",
+									"    \"LastName\": { \"type\": \"string\" },\r",
+									"    \"ContactNumber\": { \"type\": \"string\" },\r",
+									"    \"Email\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"Allergy\": { \"type\": \"string\" },\r",
+									"    \"FoodCategory\": { \"type\": \"string\" },\r",
+									"    \"FileMorbidity\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"          \"T4\": { \"type\": \"string\" },\r",
+									"          \"TSH\": { \"type\": \"string\" },\r",
+									"          \"T3\": { \"type\": \"string\" }\r",
+									"        },\r",
+									"        \"required\": [\"T4\", \"TSH\", \"T3\"]\r",
+									"      }\r",
+									"    },\r",
+									"    \"FileMorbidityCondition\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": { \"type\": \"string\" }\r",
+									"    },\r",
+									"    \"DateOfBirth\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+									"    \"DieticianId\": { \"type\": \"integer\" }\r",
+									"  },\r",
+									"  \"required\": [\"patientId\", \"FirstName\", \"LastName\", \"ContactNumber\", \"Email\", \"Allergy\", \"FoodCategory\", \"FileMorbidity\", \"FileMorbidityCondition\", \"DateOfBirth\", \"DieticianId\"]\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4fb44973-a0f7-4bc9-bd10-c5e527b85c76",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}\r",
+									"\r",
+									"function generateRandomEmail() {\r",
+									"    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let randomEmail = '';\r",
+									"\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * chars.length);\r",
+									"        randomEmail += chars.charAt(randomIndex);\r",
+									"    }\r",
+									"\r",
+									"    return `${randomEmail}@example.com`; \r",
+									"}\r",
+									"\r",
+									"pm.variables.set('randomEmail', generateRandomEmail());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "8c8cb646-50bd-4d97-8965-1a2e934ed899",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{randomEmail}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCategory}}\",\n      \"DateOfBirth\": \"{{DateOfBirth}}\"\t\n\n}",
+									"type": "text",
+									"contentType": ""
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"contentType": "multipart/form-data",
+									"src": "Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNewPatient/Raghavy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f8457f4-fba3-4acb-b211-01bbd6df8ed1",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"const schema ={\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"patientId\": { \"type\": \"integer\" },\r",
+									"    \"FirstName\": { \"type\": \"string\" },\r",
+									"    \"LastName\": { \"type\": \"string\" },\r",
+									"    \"ContactNumber\": { \"type\": \"string\" },\r",
+									"    \"Email\": { \"type\": \"string\", \"format\": \"email\" },\r",
+									"    \"Allergy\": { \"type\": \"string\" },\r",
+									"    \"FoodCategory\": { \"type\": \"string\" },\r",
+									"    \"FileMorbidity\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"          \"T4\": { \"type\": \"string\" },\r",
+									"          \"TSH\": { \"type\": \"string\" }\r",
+									"        },\r",
+									"        \"required\": [\"T4\", \"TSH\"]\r",
+									"      }\r",
+									"    },\r",
+									"    \"FileMorbidityCondition\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"additionalProperties\": { \"type\": \"string\" }\r",
+									"    },\r",
+									"    \"DateOfBirth\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+									"    \"DieticianId\": { \"type\": \"integer\" }\r",
+									"  },\r",
+									"  \"required\": [\"patientId\", \"FirstName\", \"LastName\", \"ContactNumber\", \"Email\", \"Allergy\", \"FoodCategory\", \"FileMorbidity\", \"FileMorbidityCondition\", \"DateOfBirth\", \"DieticianId\"]\r",
+									"}\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"console.log('FirstName:', pm.variables.get('FirstName'));\r",
+									"\r",
+									"const response =pm.response.json();\r",
+									"const patientId = response.patientId;\r",
+									"pm.globals.set(\"RaghavyPatient\",patientId )"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "88619b79-bf83-44fd-aa45-a05befd925ee",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}\r",
+									"\r",
+									"function generateRandomEmail() {\r",
+									"    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let randomEmail = '';\r",
+									"\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * chars.length);\r",
+									"        randomEmail += chars.charAt(randomIndex);\r",
+									"    }\r",
+									"\r",
+									"    return `${randomEmail}@example.com`; \r",
+									"}\r",
+									"\r",
+									"pm.variables.set('randomEmail', generateRandomEmail());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "4130c693-33ba-45e1-b6d9-70758ee3b543",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RASK-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n  \"ContactNumber\": \"{{ContactNumber}}\",\n  \"Email\": \"{{randomEmail}}\",\n  \"Allergy\": \"{{Allergy}}\",\n  \"FoodCategory\": \"{{FoodCategory}}\",\n  \"DateOfBirth\": \"{{DateOfBirth}}\"\n\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/SuManaSvi/Downloads/Copy of Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "Valid URL/InValid EP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8c02d017-4db5-442d-bb6c-9b70600c6df8",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "6cd9a295-b028-4788-b7f4-0939348e9701",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patien"
+					},
+					"response": []
+				},
+				{
+					"name": "Valid URL/Valid EP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "96b37f71-5597-42e7-8f0a-b87e6e22c064",
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"pm.test(\"Validate FirstName in the response\", function () {\r",
+									"  pm.expect(pm.response.json()[0].FirstName).to.equal(\"Jamie\");\r",
+									"});\r",
+									"pm.test(\"Validate LastName in the response\", function () {\r",
+									"  pm.expect(pm.response.json()[0].LastName).to.equal(\"Dsouza\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "01341fa9-2c83-4315-a94b-148d14872d44",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient"
+					},
+					"response": []
+				},
+				{
+					"name": "NegPatientsMorbidityDetails(InvalidEndPoint)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb062fcb-c8bf-4cea-8928-0d45d7a7cb4c",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "432edbcf-dd09-41bf-bfdd-c04a551b05aa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testRepots/862"
+					},
+					"response": []
+				},
+				{
+					"name": "NegPatientfilebyFileId(InvalidEndPoint)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb062fcb-c8bf-4cea-8928-0d45d7a7cb4c",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "0cf54ea7-e45f-49cc-8a5c-add66ad2e043",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testReports/viwFile/6556d4a59f75c94b7ef72c22"
+					},
+					"response": []
+				},
+				{
+					"name": "NegPatientfilebyFileId(InvalidFileID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb062fcb-c8bf-4cea-8928-0d45d7a7cb4c",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "54d3ca5e-169f-47f9-b2e0-420ebfade12c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testReports/viewFile/6556d4a59f75c94b7ef72c"
+					},
+					"response": []
+				},
+				{
+					"name": "NegPatientsMorbidityDetails(InvalidpID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb062fcb-c8bf-4cea-8928-0d45d7a7cb4c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ed6eedf4-326b-49ed-9398-2edf12bbb4ce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testReports/862"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patients Morbidity Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b765e01c-5ef9-4916-9889-98546c4d841d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"pm.globals.set(\"fileId_p\",response[0].fileId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "70f29728-dee3-4745-ba4f-19a551325fce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testReports/{{Pranita-patientId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Patient file by FileId",
+					"id": "680aaa5f-7385-4474-be96-c323c00e069b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testReports/viewFile/{{fileId_p}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient/Valid PatientID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba8d551b-0a28-4f52-aa80-d103e22f4c3a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4ea8500e-47a8-4d5c-b9d7-146aec3bbf3f",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}\r",
+									"\r",
+									"function generateRandomEmail() {\r",
+									"    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let randomEmail = '';\r",
+									"\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * chars.length);\r",
+									"        randomEmail += chars.charAt(randomIndex);\r",
+									"    }\r",
+									"\r",
+									"    return `${randomEmail}@example.com`; \r",
+									"}\r",
+									"\r",
+									"pm.variables.set('randomEmail', generateRandomEmail());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "c5a1cbe2-b2c7-4e0b-8cb2-b56f0da15d5c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{updatelastname}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{randomEmail}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCategory}}\",\n      \"DateOfBirth\": \"{{DateOfBirth}}\"\t\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient/{{Pranita-patientId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient/Invalid PatientID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "132563af-2167-49ae-9311-f47d894e80cf",
+								"exec": [
+									"const ContactNumber = generateContactNumber();\r",
+									"\r",
+									"pm.variables.set('ContactNumber', ContactNumber);\r",
+									"\r",
+									"function generateContactNumber() {\r",
+									"  let ContactNumber = '';\r",
+									"  for (let i = 0; i < 10; i++) {\r",
+									"    const digit = Math.floor(Math.random() * 10);\r",
+									"    ContactNumber += digit;\r",
+									"  }\r",
+									"  return ContactNumber;\r",
+									"}\r",
+									"\r",
+									"const DateOfBirth = generateDateOfBirth();\r",
+									"pm.variables.set('DateOfBirth', DateOfBirth);\r",
+									"\r",
+									"function generateDateOfBirth() {\r",
+									"  let DateOfBirth = '';\r",
+									"\r",
+									"const maxAge = 30;\r",
+									"const moment = require('moment');\r",
+									"\r",
+									"const maxBirthYear = moment().subtract(maxAge, 'years').year();\r",
+									"\r",
+									"const randomYear = Math.floor(Math.random() * (maxBirthYear - 1900 + 1)) + 1900;\r",
+									"\r",
+									" \r",
+									"   const randomMonth = Math.floor(Math.random() * 12) + 1;\r",
+									"    const randomDay = Math.floor(Math.random() * 28) + 1; \r",
+									"\r",
+									"   \r",
+									"    const dob = moment(`${randomYear}-${randomMonth}-${randomDay}`, 'YYYY-MM-DD');\r",
+									"\r",
+									"  \r",
+									"    return dob.format('YYYY-MM-DD');\r",
+									"\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d70925c7-357e-46db-8188-0ee3a705164e",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "88a73536-0250-4f5c-8da1-77701dd00a0f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{updatelastname}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{Email}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCategory}}\",\n      \"DateOfBirth\": \"{{DateOfBirth}}\"\t\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient/{{S-InvalidPatientID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "0cf018a7-1b76-4450-b819-44b08d436921"
+		},
+		{
+			"name": "Morbidity Controller",
+			"item": [
+				{
+					"name": "All Morbidities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ba817857-3c68-4b49-8eaa-9936b393e1eb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/morbidity"
+					},
+					"response": []
+				},
+				{
+					"name": "All Morbidities invalid end point",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "a25ff7b7-d1ad-41a5-8dec-ade3cef6b7e2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/morbiditty"
+					},
+					"response": []
+				},
+				{
+					"name": "Fasting glucose",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e4897893-596e-4603-b109-429e87e2f85c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "d78bb590-fbd1-45ff-828b-897fef16319d",
+									"key": "morbidityTestName",
+									"value": "Fasting Glucose"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invaild test name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "82c2f69a-eb51-4043-9ab6-175f6b615b7b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "89becfb0-5da2-4645-90f8-b598cde81e63",
+									"key": "morbidityTestName",
+									"value": "Cholesterol"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Average glucose",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "197f6649-0d29-4880-87e8-5cda2c9acff3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "732f2c96-682a-4868-9b89-bb4ff36450d2",
+									"key": "morbidityTestName",
+									"value": "Average Glucose"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Plasma glucose",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ebb9b0f1-365b-4163-861e-f0a49c58dce5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "6250c919-33d3-4318-8206-fa7e023a254c",
+									"key": "morbidityTestName",
+									"value": "Plasma Glucose"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HbA1c",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "26d0727f-5d45-4882-9063-f47b157a07b6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "2e7c174a-d03f-4823-9304-96dac04d4537",
+									"key": "morbidityTestName",
+									"value": "HbA1c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TSH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "5f987ca5-bffe-4854-bee7-1219e50a8492",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "4d998464-20e4-4980-bdce-3c810a947bc5",
+									"key": "morbidityTestName",
+									"value": "TSH"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "T3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f9486ed0-4769-49ce-8736-f2f4bd4a876b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "cae41452-5b22-4eef-9b09-babe1ea1b151",
+									"key": "morbidityTestName",
+									"value": "T3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "T4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "bf579a4a-5617-4756-b97d-1a9dacfb7c91",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "f4fd5e4d-4b7f-4175-8b0c-5013e140ed5d",
+									"key": "morbidityTestName",
+									"value": "T4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Blood Pressure Levels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cba8d2c-a2eb-45ed-b0dd-0c170349831d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "8f7e5bbd-0a12-4130-a848-0f21cd585622",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/morbidity/:morbidityTestName",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"morbidity",
+								":morbidityTestName"
+							],
+							"variable": [
+								{
+									"id": "e98cad1d-16f6-4536-8a50-878f82d51e74",
+									"key": "morbidityTestName",
+									"value": "Blood Pressure Levels"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "826f330b-0670-488b-b3c7-f8f9e21d839e"
+		},
+		{
+			"name": "login as a patient",
+			"item": [
+				{
+					"name": "Valid URL/Invalid EP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "014f4892-e0fe-43dc-8d0c-20a6a12b16e3",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f59e8875-64a9-48a9-8151-22e58e677b29",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"test\",\r\n  \"userLoginEmail\": \"yourspraba@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login1"
+					},
+					"response": []
+				},
+				{
+					"name": "Valid URL/Valid EP/Invalid PWD",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e84fdd87-9a29-48f3-b269-71b12b930623",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e4d13836-519c-4b14-b9e8-de116f1ecda1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"invalid\",\r\n  \"userLoginEmail\": \"yourspraba@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Valid URL/Valid EP/Invalid Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "564ff20d-be4b-4c3e-b5d3-d078cccac2bd",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "66f0085c-c5c8-4270-80e4-df081b0f7b8c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"test\",\r\n  \"userLoginEmail\": \"invalid@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "login as a patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6fbfd30d-2fda-425b-b428-332fdc7e211c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"const token = response.token;\r",
+									"console.log(token);\r",
+									"\r",
+									"pm.globals.set(\"Patient-Token\",token);\r",
+									"\r",
+									"const schema = {\r",
+									"  \r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"password\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"userLoginEmail\": {\r",
+									"        \"type\": \"string\",\r",
+									"        \"format\": \"email\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\"password\", \"userLoginEmail\"],\r",
+									"    \"additionalProperties\": false\r",
+									"  }\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Response Contains Valid Json Data\", ()=>{\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "3f12dfdf-54fd-46d0-9f6f-5d7a7d7aff03",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Patient-Token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"test\",\r\n  \"userLoginEmail\": \"{{randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patients Morbidity Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b765e01c-5ef9-4916-9889-98546c4d841d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"pm.globals.set(\"fileId_p\",response[0].fileId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "afebb190-3d6c-4cbd-b6aa-b2e2f2e2684e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Patient-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testReports/{{Pranita-patientId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Patient file by FileId",
+					"id": "f1db6137-af7f-4d2a-bb8f-517386670d78",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Patient-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/patient/testReports/viewFile/{{fileId_p}}"
+					},
+					"response": []
+				}
+			],
+			"id": "4982ec9f-b34c-4711-a5ad-2477872a9c34"
+		},
+		{
+			"name": "Delete Requests",
+			"item": [
+				{
+					"name": "Valid URL/Valid EP/Invalid PatientID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "978d405d-a986-430f-aa15-32d6c63186cc",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b2edc569-b293-40e6-8d73-39672802ee8f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BaseURL}}/patient/{{S-InvalidPatientID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Valid URL/Invalid EP/Valid PatientID",
+					"id": "4595ca23-700c-490f-b2be-9e08bef00df5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BaseURL}}/patien/{{SudhaPatient}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient/Pritee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "687a8142-e628-4da4-9b33-d2de5cf37edc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "bf99b57a-db61-44e7-bc8a-35c13f823e30",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BaseURL}}/patient/{{pID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient/Sudha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a82afd7-5fee-41af-b2cc-40488950e501",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "7a4d9376-4822-4a09-8bef-7ee548106b9b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BaseURL}}/patient/{{SudhaPatient}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient/Vivien",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7751487b-f0c7-4eda-8abb-9fe9157493cd",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "d618d4f5-9614-4c20-a2a6-090360738f43",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\n\"FirstName\": \"{{FirstName}}\",\n\"LastName\": \"{{LastName}}\",\n\"ContactNumber\": \"{{ContactNumber}}\",\n\"Email\": \"{{Email}}\",\n\"Allergy\": \"{{Allergy}}\",\n\"FoodCategory\": \"{{FoodCategory}}\",\n\"DateOfBirth\": \"{{DateOfBirth}}\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "hBi5iNOEW/Hypo Thyroid-Report.pdf.pdf"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/patient/{{patientId_Vee}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient/Raghavy",
+					"id": "5b5d5d8e-0f26-49d2-bf60-83aa7fccd8fa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RASK-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}/patient/{{RaghavyPatient}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient/Reshma",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "77bd9700-8be8-4411-80c9-c010efe43bdf",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+									"    console.log(response.json());\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "674031ab-b32e-4580-b9d7-e8ee7af67eab",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RESA-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{BaseURL}}/patient/{{Reshma-PatientID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient/Pranita",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "687a8142-e628-4da4-9b33-d2de5cf37edc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"deleted Successfully\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"deleted Successfully\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "880320d8-cc54-4bce-8712-4756649c32f0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BaseURL}}/patient/{{Pranita-patientId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "5fa1f15d-226c-45e7-bc89-2e53e15f0a11"
+		},
+		{
+			"name": "Dietician Logout",
+			"item": [
+				{
+					"name": "Invalid Logout endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf59f07c-e40c-4839-aba1-36855ac09373",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f14dada8-d385-4be2-b796-d59d7d6fd451",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Newtoken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{BaseURL}}/logoutdietician1"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/logout/Pranita",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a79950e-8a0a-4a94-9485-32d9b5fc0ac2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Logout successful\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "74cee859-ef58-446f-bf8a-2b32a95e0a93",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{P-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/logoutdietician"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/logout/Reshma",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "54e0a439-5545-4a43-88e6-2ab229fd42bb",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "a2dc4b89-97df-43d0-9351-ca961c000a6b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RESA-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/logoutdietician"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/logout/Raghavy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "384e4fba-0759-4c35-ba3e-2022311608af",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e6e578b9-d418-4d87-8174-47dcf192db0e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{RASK-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/logoutdietician"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/logout/Vivien",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c30df1ac-63e0-48dd-927b-cf07a8402f2f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "668a86e8-8da6-49da-bb18-54b84e7dbdf6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{V-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/logoutdietician"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/logout/Pritee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fbdbc927-2b90-4498-a4e2-823a64c61c00",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "aaf1bd3a-3f98-4a20-bc4f-edcf8cb0b45d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PT-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/logoutdietician"
+					},
+					"response": []
+				},
+				{
+					"name": "Dietician/logout/Sudha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4c1f1c6-b492-4ffe-aeaa-db0bf300122e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "7d3f2fb7-ba02-4746-9b65-855321570bbd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Su-Token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}/logoutdietician"
+					},
+					"response": []
+				}
+			],
+			"id": "87c9b08e-a8db-4321-8394-605a1f22c0c1"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1a7debd2-a932-4887-bf8b-6ea332163c5c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ac96715e-a55d-4b9d-b40a-a29fcad72882",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a37df47e-2e27-421a-93d1-14dc538c6d5d",
+			"key": "BaseUrl",
+			"value": "dietician-dev-41d9a344a720.herokuapp.com/dietician"
+		},
+		{
+			"id": "19bd6555-39b1-4399-8cdd-6c6883864cea",
+			"key": "getendpoint",
+			"value": "patient"
+		},
+		{
+			"id": "3adfb25a-2654-4c78-a6a5-8199dd178ca6",
+			"key": "Sudha-T",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYWlsc3VkaGFtYWhhQGdtYWlsLmNvbSIsImlhdCI6MTcwMDAxNjU5MCwiZXhwIjoxNzAwMDQ1MzkwfQ.oW5kxHJlQOfrROP6IClC371R3IYX7TMb5EdLALuUdZPOl9vzZpbPtqQy0hLXZfi1fPlKsRbPNQy7qe1cDjKJwg"
+		},
+		{
+			"id": "d850ebba-d036-41e2-99e6-b1d7d7e1b634",
+			"key": "BaseURL",
+			"value": "https://dietician-dev-41d9a344a720.herokuapp.com/dietician"
+		}
+	]
+}
